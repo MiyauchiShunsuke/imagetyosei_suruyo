@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="robots" content="noindex">
   <title>画像サイズ調整（ピンチズーム＋落下アニメ対応）</title>
   <style>
     html, body {
@@ -119,7 +120,7 @@
 <body>
   <div id="container">
     <img id="photo"
-      src="image1.jpg"
+      src="apple_1024.PNG"
       alt="画像">
     <div id="controls">
 
@@ -262,7 +263,7 @@
 
     window.addEventListener('load', () => {
       updateDim();
-      filename.textContent = `画像名: image1.jpg`;
+      filename.textContent = `画像名: apple_1024.PNG`;
     });
   </script>
 </body>
