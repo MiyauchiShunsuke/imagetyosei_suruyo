@@ -54,27 +54,27 @@
     }
 
     .top-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 5px;
-  overflow-x: auto;        /* 横スクロールを許可 */
-  white-space: nowrap;     /* 折り返さない */
-  padding-bottom: 5px;     /* スクロールバーとの間を少し開ける */
-  width: 100%;
-  -webkit-overflow-scrolling: touch; /* スマホの慣性スクロール対応 */
-  scrollbar-width: thin;             /* スクロールバーを細く（Firefox） */
-}
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+      overflow-x: auto;        /* 横スクロールを許可 */
+      white-space: nowrap;     /* 折り返さない */
+      padding-bottom: 5px;     /* スクロールバーとの間を少し開ける */
+      width: 100%;
+      -webkit-overflow-scrolling: touch; /* スマホの慣性スクロール対応 */
+      scrollbar-width: thin;             /* スクロールバーを細く（Firefox） */
+    }
 
-.thumbnail {
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
-  object-fit: cover;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: border 0.2s;
-  flex: 0 0 auto; /* 横スクロール時に画像が固定幅で並ぶように */
-}
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border 0.2s;
+      flex: 0 0 auto; /* 横スクロール時に画像が固定幅で並ぶように */
+    }
 
 
     .thumbnail:hover {
@@ -121,17 +121,36 @@
       font-size: 14px;
       font-weight: bold;
     }
+
+    .thumbnail-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 5px 10px;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
   </style>
 </head>
 <body>
   <div id="container">
     <img id="photo"
-      src="apple_1024.PNG"
+      src="normal_apple.PNG"
       alt="画像">
     <div id="controls">
 
       <div class="top-buttons">
-        <!-- ✅ サムネイル画像をクリックして選択 -->
+        <button id="toggleThumbnails" class="btn">画像一覧 表示/非表示</button>
+      </div>
+
+      <!-- ✅ サムネイル一覧を別ブロックに分離 -->
+      <div id="thumbnailContainer" class="top-buttons">
         <img src="normal_apple.PNG" class="thumbnail active" data-src="normal_apple.PNG">
         <img src="apple_1024.PNG" class="thumbnail active" data-src="apple_1024.PNG">
         <img src="apple_nurunuru.PNG" class="thumbnail" data-src="apple_nurunuru.PNG">
@@ -144,7 +163,7 @@
         <img src="orange_turuturu.PNG" class="thumbnail" data-src="orange_turuturu.PNG">
         <img src="orange_nurunuru.PNG" class="thumbnail" data-src="orange_nurunuru.PNG">
         <img src="orange_gotsugotsu.PNG" class="thumbnail" data-src="orange_gotsugotsu.PNG">
-      </div>
+    </div>
 
       <label for="sizeRange">サイズ調整 (5〜2000px):</label>
       <input id="sizeRange" type="range" min="5" max="2000" value="400">
@@ -275,7 +294,17 @@
 
     window.addEventListener('load', () => {
       updateDim();
-      filename.textContent = `画像名: apple_1024.PNG`;
+      filename.textContent = `画像名: normal_apple.PNGs`;
+    });
+
+    const toggleButton = document.getElementById('toggleThumbnails');
+    const thumbnailContainer = document.getElementById('thumbnailContainer');
+
+    toggleButton.addEventListener('click', () => {
+    thumbnailContainer.classList.toggle('hidden');
+    toggleButton.textContent = thumbnailContainer.classList.contains('hidden')
+       ? '画像一覧を表示'
+       : '画像一覧を非表示';
     });
   </script>
 </body>
